@@ -1,45 +1,48 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
+ * AlumnosFirebaseApp
+ * App de gestión de alumnos con Firebase Firestore
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import React, {useState, useEffect} from 'react';
+import {StatusBar, View} from 'react-native';
+import HomeScreen from './src/screens/HomeScreen';
+import FormScreen from './src/screens/FormScreen';
+import ListScreen from './src/screens/ListScreen';
+import {requestNotificationPermission} from './src/services/notificationService';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+type Screen = 'Home' | 'Form' | 'List';
+
+function App(): React.JSX.Element {
+  const [currentScreen, setCurrentScreen] = useState<Screen>('Home');
+
+  useEffect(() => {
+    // Solicitar permisos de notificación al iniciar
+    requestNotificationPermission();
+  }, []);
+
+  const navigate = (screen: Screen) => {
+    setCurrentScreen(screen);
+  };
+
+  const renderScreen = () => {
+    switch (currentScreen) {
+      case 'Home':
+        return <HomeScreen navigate={navigate} />;
+      case 'Form':
+        return <FormScreen navigate={navigate} />;
+      case 'List':
+        return <ListScreen navigate={navigate} />;
+      default:
+        return <HomeScreen navigate={navigate} />;
+    }
+  };
 
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
+    <View style={{flex: 1}}>
+      <StatusBar barStyle="dark-content" backgroundColor="#007AFF" />
+      {renderScreen()}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;

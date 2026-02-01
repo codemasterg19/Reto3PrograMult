@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "717839055995",
+    "project_id": "reto3programult",
+    "storage_bucket": "reto3programult.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717839055995:android:4f1eddf4be7b50ebed76de",
+        "android_client_info": {
+          "package_name": "com.alumnosfirebaseapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAn9a6Vmyg6qiZhUbIlSoHv7A54Gc0of0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
