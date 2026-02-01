@@ -9,8 +9,12 @@ type Props = {
 const HomeScreen = ({navigate}: Props) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Gestión de alumnos</Text>
-      <Text style={styles.subtitle}>Programación-Multiplataforma</Text>
+      <MaterialIcons name="school" size={80} color="#007AFF" />
+      <Text style={styles.title}>Gestión de Alumnos</Text>
+      <Text style={styles.subtitle}>Programación Multiplataforma</Text>
+      <Text style={styles.description}>
+        Aplicación para registrar y gestionar alumnos con Firebase Firestore
+      </Text>
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -24,7 +28,7 @@ const HomeScreen = ({navigate}: Props) => {
           style={styles.button}
           onPress={() => navigate('List')}>
           <MaterialIcons name="list" size={28} color="#FFFFFF" />
-          <Text style={styles.buttonText}>Ver Alumnos Inscritos</Text>
+          <Text style={styles.buttonText}>Ver Lista de Alumnos</Text>
         </TouchableOpacity>
       </View>
 
@@ -42,15 +46,23 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: 'bold',
     color: '#007AFF',
-    marginBottom: 10,
+    marginTop: 20,
+    marginBottom: 8,
   },
   subtitle: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#666',
-    marginBottom: 50,
+    marginBottom: 10,
+  },
+  description: {
+    fontSize: 14,
+    color: '#999',
+    textAlign: 'center',
+    marginBottom: 40,
+    paddingHorizontal: 40,
   },
   buttonContainer: {
     width: '100%',
@@ -65,16 +77,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 10,
   },
-  buttonIcon: {
-    fontSize: 24,
-  },
   buttonText: {
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: '600',
   },
   footer: {
-    marginTop: 50,
+    marginTop: 40,
     fontSize: 12,
     color: '#999',
   },

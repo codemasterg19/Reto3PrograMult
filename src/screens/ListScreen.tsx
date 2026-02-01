@@ -8,6 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {ScreenHeader} from '../components/ScreenHeader';
 import {getAlumnos, deleteAlumno, Alumno} from '../services/alumnosService';
 
 type Props = {
@@ -72,15 +73,7 @@ const ListScreen = ({navigate}: Props) => {
   if (loading) {
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => navigate('Home')}>
-            <MaterialIcons name="arrow-back" size={24} color="#FFFFFF" />
-            <Text style={styles.backButtonText}>Volver</Text>
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Lista de Alumnos</Text>
-        </View>
+        <ScreenHeader title="Lista de Alumnos" onBack={() => navigate('Home')} />
         <View style={styles.centerContainer}>
           <Text style={styles.loadingText}>Cargando alumnos...</Text>
         </View>
@@ -91,15 +84,7 @@ const ListScreen = ({navigate}: Props) => {
   if (alumnos.length === 0) {
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => navigate('Home')}>
-            <MaterialIcons name="arrow-back" size={24} color="#FFFFFF" />
-            <Text style={styles.backButtonText}>Volver</Text>
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Lista de Alumnos</Text>
-        </View>
+        <ScreenHeader title="Lista de Alumnos" onBack={() => navigate('Home')} />
         <View style={styles.centerContainer}>
           <Text style={styles.emptyText}>No hay alumnos registrados</Text>
           <Text style={styles.emptySubtext}>
@@ -112,15 +97,7 @@ const ListScreen = ({navigate}: Props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigate('Home')}>
-          <MaterialIcons name="arrow-back" size={24} color="#FFFFFF" />
-          <Text style={styles.backButtonText}>Volver</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Lista de Alumnos</Text>
-      </View>
+      <ScreenHeader title="Lista de Alumnos" onBack={() => navigate('Home')} />
       <FlatList
         data={alumnos}
         renderItem={renderItem}
@@ -135,28 +112,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5F5F5',
-  },
-  header: {
-    backgroundColor: '#007AFF',
-    padding: 15,
-    paddingTop: 40,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  backButton: {
-    marginRight: 15,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-  },
-  backButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-  },
-  headerTitle: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
   },
   centerContainer: {
     flex: 1,

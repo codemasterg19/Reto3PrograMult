@@ -9,6 +9,8 @@ import {
   Alert,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {ScreenHeader} from '../components/ScreenHeader';
+import {validateEmail, validateRequired} from '../utils/validators';
 import {addAlumno} from '../services/alumnosService';
 import {showNotification} from '../services/notificationService';
 
@@ -23,22 +25,17 @@ const FormScreen = ({navigate}: Props) => {
   const [diplomado, setDiplomado] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const validateEmail = (email: string) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
-
   const handleSubmit = async () => {
     // Validaciones
-    if (!matricula.trim()) {
+    if (!validateRequired(matricula)) {
       Alert.alert('Error', 'La matrícula es obligatoria');
       return;
     }
-    if (!nombre.trim()) {
+    if (!validateRequired(nombre)) {
       Alert.alert('Error', 'El nombre es obligatorio');
       return;
     }
-    if (!correo.trim()) {
+    if (!validateRequired(correo)) {
       Alert.alert('Error', 'El correo es obligatorio');
       return;
     }
@@ -46,7 +43,7 @@ const FormScreen = ({navigate}: Props) => {
       Alert.alert('Error', 'El correo no tiene un formato válido');
       return;
     }
-    if (!diplomado.trim()) {
+    if (!validateRequired(diplomado)) {
       Alert.alert('Error', 'El diplomado es obligatorio');
       return;
     }
@@ -83,15 +80,7 @@ const FormScreen = ({navigate}: Props) => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigate('Home')}>
-          <MaterialIcons name="arrow-back" size={24} color="#FFFFFF" />
-          <Text style={styles.backButtonText}>Volver</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Agregar Alumno</Text>
-      </View>
+      <ScreenHeader title="Agregar Alumno" onBack={() => navigate('Home')} />
       <View style={styles.form}>
         <Text style={styles.label}>Matrícula *</Text>
         <TextInput
@@ -149,28 +138,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5F5F5',
-  },
-  header: {
-    backgroundColor: '#007AFF',
-    padding: 15,
-    paddingTop: 40,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  backButton: {
-    marginRight: 15,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-  },
-  backButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-  },
-  headerTitle: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
   },
   form: {
     padding: 20,

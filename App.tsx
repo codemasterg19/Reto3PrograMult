@@ -8,6 +8,7 @@ import {StatusBar, View} from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import FormScreen from './src/screens/FormScreen';
 import ListScreen from './src/screens/ListScreen';
+import {TabBar} from './src/components/TabBar';
 import {requestNotificationPermission} from './src/services/notificationService';
 
 type Screen = 'Home' | 'Form' | 'List';
@@ -41,6 +42,9 @@ function App(): React.JSX.Element {
     <View style={{flex: 1}}>
       <StatusBar barStyle="dark-content" backgroundColor="#007AFF" />
       {renderScreen()}
+      {currentScreen !== 'Home' && (
+        <TabBar currentScreen={currentScreen} navigate={navigate} />
+      )}
     </View>
   );
 }
